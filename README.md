@@ -11,7 +11,7 @@ I'm restarting my Java and Data Structures & Algorithms prep from the ground up,
 | Week | Topic | Status |
 |---|---|---|
 | 1 | Java Basics — Syntax, Variables, Loops | ✅ Done |
-| 2 | Arrays & Strings (Java fundamentals) | 🔲 Not Started |
+| 2 | Arrays & Strings (Java fundamentals) | ✅ Done |
 | 3 | Collections (ArrayList, HashMap, HashSet, Stack, Queue, PriorityQueue) | 🔲 Not Started |
 | 4–5 | Arrays & Strings (DSA patterns — two pointers, sliding window, prefix sum) | 🔲 Not Started |
 | 6–7 | Recursion & Backtracking | 🔲 Not Started |

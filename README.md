@@ -12,7 +12,7 @@ I'm restarting my Java and Data Structures & Algorithms prep from the ground up,
 |---|---|---|
 | 1 | Java Basics — Syntax, Variables, Loops | ✅ Done |
 | 2 | Arrays & Strings (Java fundamentals) | ✅ Done |
-| 3 | Collections (ArrayList, HashMap, HashSet, Stack, Queue, PriorityQueue) | 🔲 Not Started |
+| 3 | Collections (ArrayList, HashMap, HashSet, Stack, Queue, PriorityQueue) | 🟡 In Progress |
 | 4–5 | Arrays & Strings (DSA patterns — two pointers, sliding window, prefix sum) | 🔲 Not Started |
 | 6–7 | Recursion & Backtracking | 🔲 Not Started |
 | 8 | Linked Lists, Stacks & Queues | 🔲 Not Started |
@@ -28,20 +28,20 @@ I'm restarting my Java and Data Structures & Algorithms prep from the ground up,
 ## How this repo is organized
 
 ```
-week01-day01-basics/
-├── Temperature.java
-├── SimpleCalculator.java
-└── NOTES.md
+src/
+└── WeekN/
+    └── DayN/
+        └── Program.java
 ```
 
-- One folder per day (Weeks 1–3), then one folder per topic once DSA problems start (Week 4 onward).
-- Every folder has a short `NOTES.md` — what I built, and one thing that confused me + how I resolved it.
+- One folder per week, with a subfolder per day.
+- Daily progress and lessons learned are tracked in the **Log** section below, plus a running `Cheat Sheet.md` at the repo root for quick method/syntax reference.
 
 ---
 
 ## Log
 
-### Week 1
+### Week 1 — Java Basics
 - **Day 1** — Variables, print statements, basic math. Built a temperature converter and a simple calculator (+, -, *, /, %). Learned that `int / int` truncates decimals, and `double / 0` gives `Infinity` instead of crashing.
 - **Day 2** — Loops + if/else combined with `%`. Built FizzBuzz, an even/odd checker, and a largest-of-three-numbers program using the running max pattern. Learned that condition order matters in `else if` chains (checking "divisible by both" before individual checks).
 - **Day 3** — Nested loops, `break`, and boolean flags. Built a primes-under-100 checker, a multiplication table, and a sum-of-digits program using the digit-peeling pattern (`% 10` then `/ 10`). Learned to trace nested loops carefully — the inner loop fully completes before the outer loop advances — and that accumulator variables (like `sum`) carry their value across iterations instead of resetting.
@@ -50,8 +50,21 @@ week01-day01-basics/
   - Temperature converter: used `nextInt()` instead of `nextDouble()` for decimal input
   - Primes: loop started at `i=1` instead of `i=2`, incorrectly flagging `1` as prime
   - Methods practice: forgot the `static` keyword on helper methods, and forgot `return fact;` in `factorial`
-  
-  All 3 gaps fixed and self-verified same day — Week 1 closed ✅.
+
+  All 3 gaps fixed and self-verified same day — **Week 1 closed ✅**
+
+### Week 2 — Arrays & Strings
+- **Day 6** — 1D arrays. Built sum, max, and min (in one pass) using the running-max/min pattern extended from Day 2. Learned that arrays index from `0`, the last valid index is `length - 1`, and that a for-each loop only reads values — it can't modify the original array (proved this with a live test: doubled values inside a for-each loop, printed the array after, and confirmed it was unchanged).
+- **Day 7** — Array manipulation. Built `reverseInPlace` (two-pointer swap) and `removeDuplicates` from a sorted array (write-pointer pattern). Hit a real bug from calling a mutating method twice — once to size a result array, once again in a loop condition — which silently corrupted the result. Fixed by storing the method's result in a variable and reusing it. Core lesson: **arrays are reference types** — passing an array into a method gives that method direct access to the same memory, so mutations persist and stack up across calls if you're not careful.
+- **Day 8** — 2D arrays. Built `printMatrix`, `sumMatrix`, and `transposeMatrix` (tested deliberately on a non-square matrix). First attempt crashed with an `ArrayIndexOutOfBoundsException` from creating the result array with the *original* dimensions instead of flipped ones (`new int[rows][cols]` instead of `new int[cols][rows]`). Fixed and re-verified clean on a cold retest during Day 10's review.
+- **Day 9** — Strings as char arrays. Built `reverseString`, `countVowels`, and `isPalindrome` using `toCharArray()` and the same two-pointer pattern from Day 7. Learned Strings are immutable (must convert to `char[]` to modify), `.equals()` vs `==` for content comparison, and hit a real gap around **method chaining order** — a `char[]` has no String methods like `.toLowerCase()`, so all String-specific operations must happen *before* converting to a char array, not after.
+- **Day 10** — StringBuilder vs String concatenation. Timed building a 100,000-character string both ways. First run had a typo (`result = result = "a"` instead of `result = result + "a"`) that invalidated the benchmark; after fixing it, measured **String concatenation: ~830ms vs StringBuilder: ~3ms — roughly a 270x difference**, from the same quadratic-copy-cost effect covered on Day 1. Also used this as a review day: retested the Day 8 transpose fix and the Day 9 chaining-order fix from memory — both came back correct.
+
+  **Week 2 closed ✅**
+
+### Week 3 — Collections
+- **Day 11** — ArrayList. Built add/get/remove/loop examples with `ArrayList<Integer>`. Learned ArrayList requires wrapper types (`Integer`, not `int`), `.size()` instead of `.length`/`.length()`, and that `remove(int index)` removes by position — not by value — unless you explicitly use the overloaded `remove(Object)` version.
+- **Day 12** — HashMap. Built a word-frequency counter using the core counting pattern `map.put(key, map.getOrDefault(key, 0) + 1)`. Learned `get()` returns `null` (not an error) for a missing key — a common source of delayed `NullPointerException` bugs — while `getOrDefault()` avoids this with a safe fallback. Also learned HashMap has **no guaranteed iteration order**. Quiz follow-up revealed a gap in applying `containsKey()` efficiently (initially reached for a manual loop instead of the built-in instant lookup) — corrected and logged in the cheat sheet.
 
 ---
 

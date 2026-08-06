@@ -12,7 +12,7 @@ I'm restarting my Java and Data Structures & Algorithms prep from the ground up,
 |---|---|---|
 | 1 | Java Basics — Syntax, Variables, Loops | ✅ Done |
 | 2 | Arrays & Strings (Java fundamentals) | ✅ Done |
-| 3 | Collections (ArrayList, HashMap, HashSet, Stack, Queue, PriorityQueue) | 🟡 In Progress |
+| 3 | Collections (ArrayList, HashMap, HashSet, Stack, Queue, PriorityQueue) | ✅ Done |
 | 4–5 | Arrays & Strings (DSA patterns — two pointers, sliding window, prefix sum) | 🔲 Not Started |
 | 6–7 | Recursion & Backtracking | 🔲 Not Started |
 | 8 | Linked Lists, Stacks & Queues | 🔲 Not Started |
@@ -65,6 +65,17 @@ src/
 ### Week 3 — Collections
 - **Day 11** — ArrayList. Built add/get/remove/loop examples with `ArrayList<Integer>`. Learned ArrayList requires wrapper types (`Integer`, not `int`), `.size()` instead of `.length`/`.length()`, and that `remove(int index)` removes by position — not by value — unless you explicitly use the overloaded `remove(Object)` version.
 - **Day 12** — HashMap. Built a word-frequency counter using the core counting pattern `map.put(key, map.getOrDefault(key, 0) + 1)`. Learned `get()` returns `null` (not an error) for a missing key — a common source of delayed `NullPointerException` bugs — while `getOrDefault()` avoids this with a safe fallback. Also learned HashMap has **no guaranteed iteration order**. Quiz follow-up revealed a gap in applying `containsKey()` efficiently (initially reached for a manual loop instead of the built-in instant lookup) — corrected and logged in the cheat sheet.
+- **Day 13** — HashSet. Built `hasDuplicate(int[] arr)` — single-pass duplicate detection using `contains()` before `add()`, instead of comparing every pair with nested loops. Learned `add()` silently ignores values already in the set (no error, no duplicate).
+- **Day 14** — Stack (via `ArrayDeque`). Built a valid-parentheses checker using `push`/`pop`/`peek`. Learned why `java.util.Stack` is generally avoided in favor of `ArrayDeque` (legacy synchronization overhead), why `pop()` on an empty stack throws `NoSuchElementException` instead of returning `null`, and the classic "looks done but isn't" bug of forgetting to check `stack.isEmpty()` at the end (misses unclosed opening brackets like `"(("`).
+- **Day 15** — Queue (FIFO, via `LinkedList`) and PriorityQueue. Built a queue drain demo confirming FIFO order, and `threeSmallest(int[] arr)` using a PriorityQueue (min-heap by default). First attempt accidentally used `arr.length` instead of `3` for both the result array size and loop bound — which didn't crash, but silently returned the *entire array sorted* instead of just the 3 smallest (a neat accidental discovery: fully draining a PriorityQueue produces a sorted array). Fixed by bounding both to `3`.
+
+  **Week 3 closed ✅ — Collections fully complete**
+
+---
+
+## What's next
+
+Starting Days 16-17: buffer/review days revisiting shaky spots from Weeks 1-3, then moving into **Two Pointers, Sliding Window, and Prefix Sum** (Days 18-25) — the first block of real, named LeetCode problems in this roadmap (Two Sum, Container With Most Water, Longest Substring Without Repeating Characters, and more).
 
 ---
 
